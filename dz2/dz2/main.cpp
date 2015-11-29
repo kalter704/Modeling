@@ -1,39 +1,41 @@
 #include <iostream>
 #include <string>
+#include <locale>
 #include "LogikElem.h"
 #include "And.h"
 #include "Or.h"
 
-void vivMas(bool* mas) {
+void outputVec(int v, bool* mas) {
+	std::cout << "V" << v << ": ";
 	for(int i = 0; i < 7; ++i) {
 		std::cout << " " << mas[i];
 	}
 	std::cout << std::endl;
 }
 
-void vivMas2(bool** mas) {
-	for(int i = 0; i < 7; ++i) {
-		std::cout << " " << *(mas[i]);
-	}
-	std::cout << std::endl;
-}
-
-void VivodTabl(bool** t) {
-	for(int i = 0; i < 16; ++i) {
-		for(int j = 0; j < 4; ++j) {
-			std::cout << " " << t[i][j];
-		}
-		std::cout << std::endl;
-	}
-}
-
 int main() {
+	setlocale(LC_ALL, "");
 	//               a     b     c     d   
- 	bool inp[] = { true, true, false, true};
+ 	bool inp[4];// = { true, true, true, true};
+
 	//               e      f      g      h      n      m      l
 	bool per[] = { false, false, false, false, false, false, false };
 	bool** per2; 
 	per2 = new bool*[7];
+
+	std::cout << "¬ведите входные значени€ a, b, c, d: " << std::endl;
+
+	std::cout << "a = ";
+	std::cin >> inp[0];
+
+	std::cout << "b = ";
+	std::cin >> inp[1];
+
+	std::cout << "c = ";
+	std::cin >> inp[2];
+
+	std::cout << "d = ";
+	std::cin >> inp[3];
 
 	LogikElem* elem0 = new And("e");
 	LogikElem* elem1 = new And("f");
@@ -91,8 +93,7 @@ int main() {
 	bool same = false;
 
 	for( ; i < maxNumIter; ++i) {
-		vivMas(per);
-		//vivMas2(per2);
+		outputVec(i, per);
 		for(int j = 0; j < 7; ++j) {
 			elems[j]->execute();
 		}
@@ -110,8 +111,8 @@ int main() {
 			break;
 		}
 	}
-
-	vivMas(per);
+	++i;
+	outputVec(i, per);
 
 	delete[] elems;
 	system("pause");
@@ -231,3 +232,20 @@ int main() {
 	//
 	//std::cout << std::endl;
 	//std::cout << std::endl;
+
+
+//void vivMas2(bool** mas) {
+//	for(int i = 0; i < 7; ++i) {
+//		std::cout << " " << *(mas[i]);
+//	}
+//	std::cout << std::endl;
+//}
+//
+//void VivodTabl(bool** t) {
+//	for(int i = 0; i < 16; ++i) {
+//		for(int j = 0; j < 4; ++j) {
+//			std::cout << " " << t[i][j];
+//		}
+//		std::cout << std::endl;
+//	}
+//}
