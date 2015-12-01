@@ -237,6 +237,7 @@ int main() {
 
 	for3::execute(inp);
 	std::cout << std::endl;
+
 	for5::execute(inp);
 
 	system("pause");
